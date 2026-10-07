@@ -16,6 +16,7 @@ public class Setor {
     private int id;
     private String nome;
 
+// Construtor vazio 
     public Setor() {
     }
 
@@ -34,4 +35,6 @@ public class Setor {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    
 }

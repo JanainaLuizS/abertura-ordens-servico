@@ -5,46 +5,48 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import br.com.aberturaordensservico.model.Setor;
 import br.com.aberturaordensservico.repository.SetorRepository;
-
+import java.util.Optional;
 
 @Service
 public class SetorService {
 
     private final SetorRepository setorRepository;
 
+
     public SetorService(SetorRepository setorRepository) {
         this.setorRepository = setorRepository;
     }
 
     
-    public Setor salvarSetor(Setor setor) {
+    public Setor cadastrar(Setor setor) {
         return setorRepository.save(setor);
     }
 
-    public List<Setor> listarSetores() {
+    public List<Setor> listar() {
         return setorRepository.findAll();
     }
 
-    public Setor buscarSetorPorId(int id) {
-        return setorRepository.findById(id).orElse(null);
+    public Optional<Setor> buscarPorId(Integer id) {
+        return setorRepository.findById(id);
     }
 
-    public Setor atualizarSetor(int id, Setor setorAtualizado) {
-        Setor setorExistente = setorRepository.findById(id).orElse(null);
-        if (setorExistente != null) {
-            setorExistente.setNome(setorAtualizado.getNome());
-            return setorRepository.save(setorExistente);
+    public Optional<Setor> atualizar(Integer id, Setor setorAtualizado) {
+
+        Optional<Setor> setorExistente = setorRepository.findById(id);
+
+        if (!setorExistente.isEmpty()) {
+            setorExistente.get().setNome(setorAtualizado.getNome());
+            return Optional.of(setorRepository.save(setorExistente.get()));
         }
-        return null;
+        
+        return Optional.empty();
     }
 
-    public boolean deletarSetor(int id) {
-        Setor setorExistente = setorRepository.findById(id).orElse(null);
-        if (setorExistente != null) {
-            setorRepository.delete(setorExistente);
+    public boolean excluir(Integer id) {
+        if (setorRepository.existsById(id)) {
+            setorRepository.deleteById(id);
             return true;
         }
         return false;
     }
-  
 }
