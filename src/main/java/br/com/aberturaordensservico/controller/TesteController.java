@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 public class TesteController {
+    
     @GetMapping("/teste")
     public String teste() {
         return "Teste de Controller";

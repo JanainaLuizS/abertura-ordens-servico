@@ -12,7 +12,6 @@ public class SetorService {
 
     private final SetorRepository setorRepository;
 
-
     public SetorService(SetorRepository setorRepository) {
         this.setorRepository = setorRepository;
     }

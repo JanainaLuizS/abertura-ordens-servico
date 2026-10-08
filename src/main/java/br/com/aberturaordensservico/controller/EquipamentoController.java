@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import br.com.aberturaordensservico.model.Equipamento;
 import br.com.aberturaordensservico.service.EquipamentoService;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/equipamentos")
@@ -19,7 +20,7 @@ public class EquipamentoController {
     }
 
     @PostMapping
-    public ResponseEntity<Equipamento> cadastrar(@RequestBody Equipamento equipamento) {
+    public ResponseEntity<Equipamento> cadastrar(@Valid @RequestBody Equipamento equipamento) {
         return equipamentoService.cadastrar(equipamento)
                 .map(novoEquipamento -> ResponseEntity.status(HttpStatus.CREATED).body(novoEquipamento)) // 201
                 .orElse(ResponseEntity.badRequest().build()); // 400 Bad Request se o setor não existir
@@ -38,7 +39,7 @@ public class EquipamentoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Equipamento> atualizar(@PathVariable Integer id, @RequestBody Equipamento equipamento) {
+    public ResponseEntity<Equipamento> atualizar(@Valid @PathVariable Integer id, @RequestBody Equipamento equipamento) {
         return equipamentoService.atualizar(id, equipamento)
                 .map(equipamentoAtualizado -> ResponseEntity.ok(equipamentoAtualizado)) // 200
                 .orElse(ResponseEntity.notFound().build()); // 404
