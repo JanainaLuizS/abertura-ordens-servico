@@ -26,7 +26,6 @@ public class Equipamento {
 
     @ManyToOne
     @JoinColumn(name = "setor_id")
-
     @NotNull (message = "O setor do equipamento é obrigatório")
     private Setor setor;
 
