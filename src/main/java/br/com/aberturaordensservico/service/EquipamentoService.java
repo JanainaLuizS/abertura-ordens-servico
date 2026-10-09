@@ -25,7 +25,7 @@ public class EquipamentoService {
        
         if (equipamento.getSetorId() != null) {
             Optional<Setor> setorOpt = setorRepository.findById(equipamento.getSetorId());
-            if (setorOpt.isPresent()) {
+            if (setorOpt.isPresent()) { 
 
                 Equipamento novoEquipamento = new Equipamento(
                         equipamento.getNome(),
