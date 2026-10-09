@@ -7,4 +7,5 @@ import br.com.aberturaordensservico.model.Equipamento;
 
 @Repository
 public interface EquipamentoRepository extends JpaRepository<Equipamento, Integer> {
+
 }
