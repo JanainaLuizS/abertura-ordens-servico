@@ -51,7 +51,7 @@ public class OrdemServicoController {
         
     }
 
-    @PatchMapping("/{id}/encerramento") 
+    @PatchMapping("/{id}/encerramento") //esse endqpoint é para encerrar uma ordem de serviço, e ele vai receber o id da ordem de serviço que eu quero encerrar, e o corpo da requisição vai ser um objeto do tipo EncerramentoOrdemServicoRequest, que vai conter a data de encerramento e a descrição do encerramento.
     public ResponseEntity<OrdemServico> encerrarOrdemServico(@PathVariable Integer id, @Valid @RequestBody br.com.aberturaordensservico.dto.EncerramentoOrdemServicoRequest dados) {
         return ordemServicoService.encerrarOrdemServico(id, dados)
                 .map(ordemServico -> ResponseEntity.ok(ordemServico)) // 200 OK
