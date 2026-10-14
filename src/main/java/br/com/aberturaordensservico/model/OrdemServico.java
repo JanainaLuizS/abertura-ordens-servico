@@ -19,6 +19,8 @@ public class OrdemServico {
 
     String descricao;
     LocalDateTime dataAbertura;
+    LocalDateTime dataEncerramento; // não precisa colocar no construtor, pois quando a ordem de serviço é criada, ela ainda não foi encerrada, então o campo dataEncerramento será nulo. Quando a ordem de serviço for encerrada, o campo dataEncerramento será preenchido com a data e hora do encerramento.
+    String Solucao; 
 
     @ManyToOne
     @JoinColumn(name = "equipamento_id")
@@ -45,12 +47,28 @@ public class OrdemServico {
         this.descricao = descricao;
     }
 
+    public String getSolucao() {
+        return Solucao;
+    }
+
+    public void setSolucao(String Solucao) {
+        this.Solucao = Solucao;
+    }
+
     public LocalDateTime getDataAbertura() {
         return dataAbertura;
     }
 
     public void setDataAbertura(LocalDateTime dataAbertura) {
         this.dataAbertura = dataAbertura;
+    }
+
+    public LocalDateTime getDataEncerramento() {
+        return dataEncerramento;
+    }
+
+    public void setDataEncerramento(LocalDateTime dataEncerramento) {
+        this.dataEncerramento = dataEncerramento;
     }
 
     public Equipamento getEquipamento() {

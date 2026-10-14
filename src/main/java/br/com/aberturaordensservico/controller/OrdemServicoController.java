@@ -2,6 +2,7 @@ package br.com.aberturaordensservico.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,6 +50,17 @@ public class OrdemServicoController {
         
         
     }
-  
+
+    @PatchMapping("/{id}/encerramento") 
+    public ResponseEntity<OrdemServico> encerrarOrdemServico(@PathVariable Integer id, @Valid @RequestBody br.com.aberturaordensservico.dto.EncerramentoOrdemServicoRequest dados) {
+        return ordemServicoService.encerrarOrdemServico(id, dados)
+                .map(ordemServico -> ResponseEntity.ok(ordemServico)) // 200 OK
+                .orElse(ResponseEntity.notFound().build()); // 404 Not Found
+    }   
    
+    @GetMapping ("/abertas") //o nome do endpoint é /ordens-servico/abertas, pois o @RequestMapping da classe (lá em cima) já define o prefixo /ordens-servico, como um nome geral, Então, quando eu fizer uma requisição GET para /ordens-servico/abertas, ele vai chamar esse método listarOrdensServicoNaoEncerradas() e me retornar todas as ordens de serviço que ainda não foram encerradas.
+    public ResponseEntity<Iterable<OrdemServico>> listarOrdensServicoNaoEncerradas() {
+        return ResponseEntity.ok(ordemServicoService.listarOrdensServicoNaoEncerradas());
+    }
+
 }
